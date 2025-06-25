@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>denibacar – CV</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <div class="header-item left">
+                <a href="main.html" class="btn">denibacar</a>
+            </div>
+            <div class="header-item right">
+                <a href="https://europa.eu/europass/eportfolio/screen/share/856495d3-35da-4c6d-896c-b5ac336868e1?lang=en" class="btn">Prenesi CV</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-content">
+        <!-- Profile as a two-column grid -->
+        <section class="profile">
+            <div class="profile-photo">
+                <img src="assets/img/profile.jpg" alt="Deni Bačar" class="profile-image">
+            </div>
+            <div class="profile-text">
+                <h3 class="subtitle">Specialist za 3D vizualizacije</h3>
+                <p class="description">Sem študent na Naravoslovnotehniški fakulteti, UL, kjer se izobražujem v grafičnih in interaktivnih komunikacijah. Moje izkušnje vključujejo delo v multimedijskem laboratoriju in podjetjih, kjer sem razvil svoje veščine v 3D modeliranju, vizualizaciji in animaciji.</p>
+                <p><strong>E-pošta:</strong> <a href="mailto:deni.bacar@gmail.com" class="email-link">deni.bacar@gmail.com</a></p>
+            </div>
+        </section>
+
+        <!-- SCROLLING BANNER #1 -->
+        <div class="outer outer-top">
+            <div>
+                <div class="loop"><div class="scroller">DELOVNE IZKUŠNJE </div></div>
+            </div>
+        </div>
+
+        <!-- Experience: each job is a two-column grid (details + date) -->
+        <section class="experience">
+        <h2>Delovne izkušnje</h2>
+
+        <div class="job">
+            <div class="job-details">
+                <h3>Strokovnjak za 3D modeliranje in animacijo</h3>
+                <p class="company">Multimedijski laboratorij, Fakulteta za elektrotehniko, UL</p>
+                <ul>
+                    <li>3D modeliranje in teksturiranje za multimedijske projekte</li>
+                    <li>Animiranje in upodabljanje kratkih 3D sekvenc</li>
+                    <li>Sodelovanje pri konceptih in oblikovalskih iteracijah</li>
+                </ul>
+            </div>
+            <p class="date">julij 2024 – januar 2025</p>
+        </div>
+
+        <div class="job">
+            <div class="job-details">
+                <h3>3D Vizualizacijski specialist</h3>
+                <p class="company">NAI SIGNIFICA d.o.o., Ljubljana</p>
+                <ul>
+                    <li>Ustvarjanje realističnih 3D vizualizacij nepremičnin</li>
+                    <li>Razvoj 360° virtualnih sprehodov z uporabo Matterport tehnologije</li>
+                    <li>Integracija vizualizacij v spletne oglase</li>
+                </ul>
+            </div>
+            <p class="date">september 2022 – julij 2023</p>
+        </div>
+
+        <div class="job">
+            <div class="job-details">
+                <h3>Vodja oglaševanja</h3>
+                <p class="company">Tri-Star d.o.o., Ajdovščina</p>
+                <ul>
+                    <li>Upravljanje spletne strani in oglasnih platform</li>
+                    <li>Fotografiranje in postprodukcija izdelkov</li>
+                    <li>Skladiščna dela in pomoč pri prodaji</li>
+                </ul>
+            </div>
+            <p class="date">december 2018 – danes</p>
+        </div>
+        </section>
+
+        <!-- SCROLLING BANNER #2 -->
+        <div class="outer outer-bottom">
+            <div>
+                <div class="loop"><div class="scroller">IZOBRAZBA </div></div>
+            </div>
+        </div>
+
+        <!-- Education: same grid pattern as jobs -->
+        <section class="education">
+        <h2>Izobrazba</h2>
+
+        <div class="school">
+            <div class="school-details">
+                <h3>Predvidena diploma iz grafičnih in interaktivnih komunikacij</h3>
+                <p class="institution">Naravoslovnotehniška fakulteta, UL</p>
+            </div>
+            <p class="date">september 2020 – danes</p>
+        </div>
+
+        <div class="school">
+            <div class="school-details">
+                <h3>Gimnazijski maturant</h3>
+                <p class="institution">Škofijska gimnazija Vipava</p>
+            </div>
+            <p class="date">avgust 2016 – julij 2020</p>
+        </div>
+        </section>
+    </main>
+
+    <footer class="site-footer">
+        <p>&copy; 2025 denibacar.</p>
+    </footer>
+
+    <script>
+        // set up each banner
+        document.querySelectorAll('.outer .loop').forEach(loop => {
+            const outer = loop.closest('.outer');
+            const orig  = loop.querySelector('.scroller');
+            
+            // how many repeats to cover the full banner?
+            const needed = Math.ceil(outer.clientWidth / orig.offsetWidth) + 1;
+            let strip = '';
+            for (let i = 0; i < needed; i++) {
+                strip += `<div class="scroller">${orig.textContent}</div>`;
+            }
+            loop.innerHTML = strip + strip; // double for seamless
+            
+            // animate via Web Animations API
+            const total = loop.scrollWidth / 2;
+            loop._anim = loop.animate(
+                [
+                    { transform: 'translateX(0)' },
+                    { transform: `translateX(-${total}px)` }
+                ],
+                {
+                    duration: window.innerWidth < 768 ? 30000 : 25000,
+                    iterations: Infinity,
+                    easing: 'linear',
+                    direction: 'reverse'  // start L→R
+                }
+            );
+        });
+
+        // flip on scroll-up
+        let lastY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            const scrollUp = window.scrollY < lastY;
+            document.querySelectorAll('.outer .loop').forEach(loop => {
+                loop._anim.effect.updateTiming({
+                    direction: scrollUp ? 'normal'  /* R→L */ 
+                   : 'reverse' /* L→R */
+                });
+            });
+            lastY = window.scrollY;
+        });
+
+        // adjust speed if the user resizes
+        window.addEventListener('resize', () => {
+            document.querySelectorAll('.outer .loop').forEach(loop => {
+                loop._anim.updateTiming({
+                    duration: window.innerWidth < 768 ? 30000 : 25000
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

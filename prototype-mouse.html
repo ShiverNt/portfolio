@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>denibacar – Prototipiranje</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <!-- External stylesheet -->
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <header class="header">
+        <div class="header-inner">
+            <div class="header-item left">
+                <a href="main.html" class="btn">denibacar</a>
+            </div>
+        </div>
+    </header>
+
+    <main class="page-content vr-content">
+        <div class="project-container">
+            <!-- Overview -->
+            <section class="overview">
+                <h1>Prototip 3D tiskane računalniške miške</h1>
+            </section>
+
+            <!-- Video Section -->
+            <section class="video-section">
+                <!-- Privacy-enhanced, muted & looping embed -->
+                <iframe
+                    src="https://www.youtube.com/embed/clyQHNMQc8g?si=DK9n0UiFSiPH09XN&loop=1" title="YouTube video player"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    referrerpolicy="strict-origin-when-cross-origin"
+                    allowfullscreen>
+                </iframe>
+                <p>Video prikaže glavne funkcionalnosti in navigacijo po prostoru.</p>
+            </section>
+
+            <!-- Detailed Description -->
+            <section class="text-section">
+                <p>V tem prototipnem projektu sem zasnoval in izdelal delujočo računalniško miško po meri z 3D tiskanjem ter zanjo ustvaril visoko kakovostno 3D animacijo, podprto s fizikalnimi simulacijami. Animacija vključuje dramatično osvetlitev, tekoče gibanje in prefinjene interakcije med posameznimi komponentami, kar poudari detajlne teksture in oblikovne značilnosti miške.</p>
+                <p>Trenutna različica uspešno predstavi osnovni koncept, vendar bo končni render dodatno izpopolnil osvetlitev, senčenje in splošno vizualno kvaliteto, da dosežemo največji možni vtis in profesionalno dovršenost.</p>
+                <br>
+                <ul>
+                    <li><strong>Programsko orodje:</strong> Blender in Bamboo Studio</li>
+                    <li><strong>Strojno orodje:</strong> 3D tiskalnik Bamboo Lab A1 mini</li>
+                </ul>
+            </section>
+
+        <!-- Scrolling Banners -->
+        <div class="outer outer-top">
+            <div>
+                <div class="loop"><div class="scroller">3D PROTOTIP 3D TISK 3D PROTOTIP 3D TISK 3D PROTOTIP 3D TISK 3D PROTOTIP 3D TISK 3D PROTOTIP 3D TISK 3D PROTOTIP 3D TISK 3D PROTOTIP 3D TISK 3D PROTOTIP 3D TISK 3D PROTOTIP 3D TISK </div></div>
+            </div>
+        </div>
+        <div class="outer outer-bottom">
+            <div>
+                <div class="loop"><div class="scroller">SIMULACIJA ANIMACIJA SIMULACIJA ANIMACIJA SIMULACIJA ANIMACIJA SIMULACIJA ANIMACIJA SIMULACIJA ANIMACIJA SIMULACIJA ANIMACIJA SIMULACIJA ANIMACIJA SIMULACIJA ANIMACIJA </div></div>
+            </div>
+        </div>
+    </main>
+
+
+    <footer class="site-footer">
+        <p>&copy; 2025 denibacar.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+        const btn = document.querySelector('.scroll-top');
+        const SHOW_AFTER = 1200;            // px scrolled before we reveal button
+
+        /* reveal / hide on scroll */
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > SHOW_AFTER) {
+            btn.classList.add('show');
+            } else {
+            btn.classList.remove('show');
+            }
+        });
+
+        /* smooth scroll to top */
+        btn.addEventListener('click', () =>
+            window.scrollTo({ top: 0, behavior: 'smooth' })
+        );
+        });
+
+
+        
+        // Scrolling banner logic (unchanged)
+        document.querySelectorAll('.outer .loop').forEach(loop => {
+            const outer = loop.closest('.outer');
+            const orig  = loop.querySelector('.scroller');
+            const needed = Math.ceil(outer.clientWidth / orig.offsetWidth) + 1;
+            let strip = '';
+            for (let i = 0; i < needed; i++) strip += `<div class="scroller">${orig.textContent}</div>`;
+            loop.innerHTML = strip + strip;
+            const total = loop.scrollWidth / 2;
+            loop._anim = loop.animate([
+                { transform: 'translateX(0)' },
+                { transform: `translateX(-${total}px)` }
+            ], {
+                duration: window.innerWidth < 768 ? 30000 : 25000,
+                iterations: Infinity,
+                easing: 'linear',
+                direction: 'reverse'
+            });
+        });
+        let lastY = window.scrollY;
+        window.addEventListener('scroll', () => {
+            const scrollUp = window.scrollY < lastY;
+            document.querySelectorAll('.outer .loop').forEach(loop => {
+                loop._anim.effect.updateTiming({ direction: scrollUp ? 'normal' : 'reverse' });
+            });
+            lastY = window.scrollY;
+        });
+        window.addEventListener('resize', () => {
+            document.querySelectorAll('.outer .loop').forEach(loop => {
+                loop._anim.updateTiming({ duration: window.innerWidth < 768 ? 30000 : 25000 });
+            });
+        });
+    </script>
+</body>
+</html>

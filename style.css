@@ -1,0 +1,420 @@
+:root {
+  --bg: #000;
+  --text: #fff;
+  --primary-gap: 2rem;
+  --font: 'Inter', sans-serif;
+}
+
+/* 1. Global Reset & Box Sizing */
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+html, body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font);
+  font-weight: 200;
+  color: var(--text);
+  background: var(--bg);
+  line-height: 1.6;
+}
+body {
+  overflow-x: hidden; /* prevent horizontal scroll */
+}
+
+/* 2. Full-screen Spline Background */
+spline-viewer {
+  position: fixed;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 115vw; height: 115vh;
+}
+
+/* 3. Header & Navigation */
+.header, .main-header { /* fix header over scroll bar*/
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 80px; /* height of the header */
+  align-items: center;
+  padding: 0;/*20px auto 160px;*/
+  background: #000;
+  z-index: 1000; /* above everything else */
+}
+.main-header { /* for the main page */
+  background: transparent;
+}
+
+.header-inner {
+  display: grid; /* two-column grid for logo/title and buttons */
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px 0px;
+}
+.title,
+.btn {
+  background: transparent;
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.875rem;
+  font-weight: 900;
+  padding: 8px 16px;
+}
+.btn:hover {
+  text-decoration: underline;
+  font-style: italic;
+}
+/*---------------------------------------------*/
+
+/* 4. Page Content Wrapper */
+
+.page-content {
+  margin: calc(1rem + 4rem) auto 0;
+  padding: 8px 16px;
+  max-width: 1200px;
+  width: 100%;
+  z-index: 1; /* above the Spline background */
+}
+
+/* 5. CV ------------------------------------------------------*/
+.cv-content {
+  display: grid;
+  gap: 2rem; /* consistent gutters */
+}
+
+/* Profile Section */
+.profile {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1.5rem;
+  align-items: center;
+}
+.profile-image {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+}
+
+/* Personal Info */
+.info-list {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 0.5rem 1rem;
+  align-items: center;
+}
+.email-link {
+  color: #fff;
+  text-decoration: none;
+  user-select: all;
+}
+
+/* Experience & Education */
+.job,
+.school {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0.5rem 1rem;
+}
+.date {
+  font-style: italic;
+  font-size: 0.9rem;
+  color: #ccc;
+  justify-self: end;
+}
+
+/* Section Headings & Text */
+.page-content h1 {
+  font-size: 1.875rem;
+  font-weight: 900;
+}
+.page-content h2 {
+  font-size: 1.75rem;
+  font-weight: 900;
+  margin-bottom: 0;
+}
+.page-content h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0;
+}
+.page-content p,
+.page-content li {
+  line-height: 1.6;;
+  margin-bottom: 0.5em;
+  margin-top: 0.5em;
+}
+.page-content ul {
+  list-style: disc;
+  margin-left: 1.5em;
+  margin-bottom: 1.5em;
+  margin-top: 0;
+  padding: 0;
+}
+.page-content strong {
+  font-weight: 900;
+}
+
+/* Video Section-------------------------------------------- */
+.video-section {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  overflow: hidden;
+}
+.video-section iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+
+/* Gallery --------------------------------------------------*/
+.gallery {
+  display: grid;          /* keep grid so gap still works */
+  grid-template-columns: 1fr;   /* one column that spans 100 % */
+  gap: var(--primary-gap);      /* same vertical spacing you use elsewhere */
+  padding-bottom: 7vh; /* add some space at the bottom */
+}
+
+.gallery figure {
+  margin: 0;            /* remove default figure margin */
+  padding: 0;           /* remove default figure padding */
+  display: grid;        /* keep grid so gap still works */
+  grid-template-columns: 1fr;   /* one column that spans 100 % */
+  gap: 1vh;      /* same vertical spacing you use elsewhere */
+}
+
+.gallery img {
+  width: 100%;             /* already present – keeps each photo full-width */
+}
+
+.gallery figcaption {
+  text-align: center;        /* optional: align caption text as you like */
+}
+
+.project a { color: var(--text); text-decoration: underline;}
+
+/* 360 Gallery */
+.gallery-360 {
+  display: grid;          /* keep grid so gap still works */
+  grid-template-columns: 1fr;   /* one column that spans 100 % */
+  gap: var(--primary-gap);      /* same vertical spacing you use elsewhere */
+  padding-bottom: 7vh; /* add some space at the bottom */
+}
+
+.gallery-360 .project-section {
+  margin: 0;            /* remove default figure margin */
+  padding: 0;           /* remove default figure padding */
+  display: grid;        /* keep grid so gap still works */
+  grid-template-columns: 1fr;   /* one column that spans 100 % */
+  gap: 1vh;      /* same vertical spacing you use elsewhere */
+  width: 100%;
+}
+
+.gallery-360 .asset-caption p {
+  text-align: center;
+  margin: 0.5rem;
+}
+
+/* make the .asset-responsive fill its container with a 16:9 aspect ratio */
+.gallery-360 .asset-responsive {
+  position: relative;
+  width: 100%;
+  /* 9/16 = 56.25%: preserves the aspect ratio */
+  padding-bottom: 56.25%;
+  height: 0;
+  overflow: hidden;
+}
+
+/* force the iframe to stretch to exactly the wrapper’s bounds */
+.gallery-360 .asset-responsive iframe {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* Footer--------------------------------------------------- */
+footer {
+  margin-top: auto;
+  padding: var(--primary-gap) 0;
+  padding-bottom: 0;
+  font-size: 0.85rem;
+  color: #ccc;
+  display: grid;
+  gap: 0.5rem;
+  text-align: center;
+}
+
+/* show projects in a grid -----------------------------------*/
+.projects {
+  display: grid;
+  /* auto-fit as many 250px-wide columns as will fit, each at least 250px but can grow */
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 1rem;
+  padding: 0;
+  margin: 0;
+  max-width: 1200px;
+}
+
+.project {
+  aspect-ratio: 1/1;
+  display: flex;
+  flex-direction: column;
+  background: #1a1a1a;
+  overflow: hidden;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+
+  /* make it act like a link */
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.project img {
+  flex: 1;               /* allow image to grow and fill available space */
+  width: 100%;
+  object-fit: cover; /* cover the entire area */
+}
+
+.project-title {
+  margin: 1rem 0;
+  font-size: 1.1rem;
+  color: #ffffff;
+  text-align: center;
+}
+
+
+/* Scroll-to-Top Button -------------------------------------- */
+.scroll-top {
+  position: fixed;
+  bottom: 1.875rem;
+  right: 1.875rem;
+  width: 3.5rem;
+  height: 3.5rem;
+  border: none;
+  border-radius: 50%;
+  background: url(assets/upArrow.svg) no-repeat center center;
+  background-size: cover;
+  color: #fff;
+  font-size: 1.25rem;
+  cursor: pointer;
+  opacity: 0;             /* hidden by default */
+  pointer-events: none;   /* avoid tab-stop when hidden */
+  transform: translateY(1rem);
+  transition: opacity .35s ease, transform .35s ease;
+  z-index: 999;           /* above everything else */
+}
+
+.scroll-top.show {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* 6. Mobile Warning */
+.mobile-warning {
+  display: none;
+  position: fixed;
+  top: 80px;
+  left: 0;
+  width: 100%;
+  color: #ffffff7f;
+  text-align: center;
+  padding: 10px;
+  z-index: 2;
+}
+
+/* horizontal scrolling ----------------------------------------------------*/
+/* ───── Full-width angled banners ───── */
+.outer {
+    position: relative;
+    margin: 4rem 0;     /* keep your vertical spacing */
+    opacity: 0.1;
+    left: 50%;
+    width: 120vw;           /* span the entire viewport width */
+    margin-left: -60vw;     /* pull it back so it lines up with the viewport’s left edge */
+    overflow: hidden;
+}
+
+/* make one banner tilt left, the other tilt right */
+.outer.outer-top    {
+    transform: rotate(-2.5deg);
+    margin-block-start: -1.5rem;  /* space above */
+    margin-block-end: -0.5rem;  /* space below */
+}
+.outer.outer-bottom {
+    transform: rotate( 2.5deg);
+    margin-block-start: 0.5rem;  /* space above */
+    margin-block-end: -3rem;  /* space below */
+}
+
+/* the moving strip */
+.loop {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.scroller {
+  display: inline-block;
+  font-family: var(--font);
+  font-size: 1.875rem;
+  font-weight: 900;
+  font-style: italic;
+  padding-left: 0.25em;
+}
+
+@media (max-width: 768px) {
+  .page-content  {
+    margin: 90px 10px;
+    padding: 0 10px;
+    width: calc(100% - 20px);
+  }
+  .mobile-warning {
+    display: block;
+  }
+  .profile {
+    grid-template-columns: 1fr;
+    text-align: center;
+    justify-items: center;
+  }
+  .info-list,
+  .job,
+  .school {
+    grid-template-columns: 1fr;
+  }
+  .job {
+    margin-bottom: 1.5rem;
+  }
+  .date {
+    order: -1;
+    justify-self: start;
+    margin-bottom: 0;
+  }
+  .job-details h3, .school-details h3 {
+    margin-top: 0;
+  }
+
+  /* Scrolling Banners */
+  .scroller { font-size: 2rem; }
+  /* make one banner tilt left, the other tilt right */
+  .outer.outer-top    {
+      margin-block-start: -0.7rem;  /* space above */
+      margin-block-end:   -0.7rem;  /* space below */
+  }
+  .outer.outer-bottom {
+      margin-block-start: -1.5rem;  /* space above */
+      margin-block-end:   -2rem;  /* space below */
+  }
+}
+
+/* 7. Responsive Breakpoints */
+@media (max-width: 1024px) {
+  spline-viewer {
+    width: 100vw;
+  }
+}
