@@ -334,7 +334,7 @@ footer {
 .outer {
     position: relative;
     margin: 4rem 0;     /* keep your vertical spacing */
-    opacity: 0.1;
+    color: #1A1A1A;
     left: 50%;
     width: 120vw;           /* span the entire viewport width */
     margin-left: -60vw;     /* pull it back so it lines up with the viewport’s left edge */
