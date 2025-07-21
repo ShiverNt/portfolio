@@ -402,6 +402,7 @@ footer {
   /* Scrolling Banners */
   .scroller { font-size: 2rem; }
   /* make one banner tilt left, the other tilt right */
+  .outer { color: #303030; }
   .outer.outer-top    {
       margin-block-start: -0.7rem;  /* space above */
       margin-block-end:   -0.7rem;  /* space below */
